@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using OdeToFood.Data;
 using OdeToFood.Models;
 using SQLitePCL;
@@ -32,6 +33,13 @@ namespace OdeToFood.Services
             _context.Restaurants.Add(newRestaurant);
             _context.SaveChanges();
             return newRestaurant;
+        }
+
+        public Restaurant Update(Restaurant editRestaurant)
+        {
+            _context.Attach(editRestaurant).State = EntityState.Modified;
+            _context.SaveChanges();
+            return editRestaurant;
         }
     }
 }

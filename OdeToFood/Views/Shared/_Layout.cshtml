@@ -1,0 +1,43 @@
+﻿@using OdeToFood.ViewComponent
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+<div>
+    @RenderBody()
+</div>
+<div>@DateTime.Now.Year</div>
+<footer>
+    @*@RenderSection("footer", required:true)*@
+    @await Component.InvokeAsync("Greeter")
+    @if (User.Identity.IsAuthenticated)            
+    {
+        foreach (var identity in User.Identities)
+        {
+            <h3>@identity.Name</h3>
+            <ul>
+                @foreach (var claim in identity.Claims)
+                {
+                    <li>@claim.Type - @claim.Value</li>
+                }
+            </ul>
+        }
+    }
+    else
+    {
+        <div>You are not logged in.</div>
+    }
+</footer>
+<environment include="Development">
+    <script src="~/node_modules/jquery/dist/jquery.js"></script>
+    <script src="~/node_modules/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+</environment>
+
+</body>
+</html>

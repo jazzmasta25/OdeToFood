@@ -34,5 +34,13 @@ namespace OdeToFood.Services
             _restaurants.Add(restaurant);
             return restaurant;
         }
+
+        public Restaurant Update(Restaurant editRestaurant)
+        {
+            var edit = _restaurants.First(r => r.Id == editRestaurant.Id);
+            edit.Name = editRestaurant.Name;
+            edit.Cuisine = editRestaurant.Cuisine;
+            return editRestaurant;
+        }
     }
 }
